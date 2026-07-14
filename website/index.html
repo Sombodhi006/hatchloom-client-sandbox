@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'ÉTOILE — Fall/Winter Collection</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A high-fashion, editorial-grade visual showcase presenting the Fall/Winter Collection of L'ÉTOILE, featuring immersive scroll-based interactive animations.">
+    <meta name="keywords" content="fashion, luxury, editorial, design, model, scroll animation, interactive visual">
+    <meta name="author" content="L'ÉTOILE">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader Overlay -->
+    <div id="loader" class="preloader">
+        <div class="loader-content">
+            <span class="loader-subtitle">MONOCHROME ARCHIVE</span>
+            <h1 class="loader-logo">L'ÉTOILE</h1>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <div id="loader-percent" class="loader-percent">00%</div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Sticky Canvas for Image Sequence -->
+    <div class="canvas-wrapper">
+        <canvas id="animation-canvas"></canvas>
+        <div class="canvas-overlay"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <!-- Main Scroll Container -->
+    <div class="scroll-container">
+        
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-logo">L'ÉTOILE</div>
+            <nav class="header-nav">
+                <a href="#silhouette" class="nav-link">Silhouette</a>
+                <a href="#spotlight" class="nav-link">Spotlight</a>
+                <a href="#details" class="nav-link">Details</a>
+                <a href="#collection" class="nav-link">Archive</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-primary" id="btn-inquire">Inquire</button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="section hero-section" id="hero">
+            <div class="hero-bg-text">MONOCHROME</div>
+            <div class="container hero-container">
+                <div class="hero-left-col">
+                    <span class="tag-line">COLLECTION № 01</span>
+                    <h1 class="title-main">Elegance<br>In Motion</h1>
+                </div>
+                <div class="hero-right-col">
+                    <p class="hero-description">
+                        An exploration of structure, fabric, and silhouette under the high-contrast lighting of a singular spotlight. Every movement unveils a new contour, a soft curve, and a sharp boundary.
+                    </p>
+                    <div class="scroll-prompt">
+                        <span class="scroll-text">Scroll to Experience</span>
+                        <div class="scroll-line">
+                            <div class="scroll-line-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: The Silhouette -->
+        <section class="section silhouette-section" id="silhouette">
+            <div class="container">
+                <div class="editorial-grid">
+                    <div class="grid-item text-block block-left">
+                        <span class="section-num">01 / SILHOUETTE</span>
+                        <h2 class="editorial-heading">The Flow of Velvet</h2>
+                        <p class="editorial-body">
+                            Structured velvet contours the body, creating an elongated silhouette that drapes elegantly to the floor. The thigh-high slit contrasts with the high strapless neckline, balancing exposure and restraint.
+                        </p>
+                    </div>
+                    <div class="grid-item line-spacer"></div>
+                    <div class="grid-item text-block block-right">
+                        <h3 class="editorial-quote">"True style is a dialogue between the material and the body in space."</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Light and Shadow -->
+        <section class="section spotlight-section" id="spotlight">
+            <div class="text-stripe-container">
+                <div class="text-stripe text-stripe-left" id="stripe-1">SPOTLIGHT &bull; SHADOW &bull; CONTRAST</div>
+                <div class="text-stripe text-stripe-right" id="stripe-2">CHAIR &bull; STRUCTURE &bull; FORM</div>
+            </div>
+            <div class="container">
+                <div class="editorial-grid">
+                    <div class="grid-item spacer-col"></div>
+                    <div class="grid-item text-block block-center">
+                        <span class="section-num">02 / INTERPLAY</span>
+                        <h2 class="editorial-heading">Chiaroscuro</h2>
+                        <p class="editorial-body">
+                            The spotlight is our lens. By isolating the subject against deep blacks, we strip away the unnecessary, leaving only form, texture, and stance. The shadows become as structural as the dress itself.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Details -->
+        <section class="section details-section" id="details">
+            <div class="container">
+                <div class="editorial-grid">
+                    <div class="grid-item text-block block-left">
+                        <span class="section-num">03 / FABRIC AND MOTION</span>
+                        <h2 class="editorial-heading">Avant-Garde Craftsmanship</h2>
+                        <p class="editorial-body">
+                            Tailored specifically to capture light, the deep black fabric absorbs ambient rays while catching direct spotlight edges, forming a glowing outline around the model's movements.
+                        </p>
+                    </div>
+                    <div class="grid-item details-table-col">
+                        <table class="editorial-table">
+                            <tr>
+                                <td>Material</td>
+                                <td>Crushed Silk Velvet</td>
+                            </tr>
+                            <tr>
+                                <td>Finish</td>
+                                <td>Deep Obsidian Matte</td>
+                            </tr>
+                            <tr>
+                                <td>Details</td>
+                                <td>Hand-sewn Invisible Slit</td>
+                            </tr>
+                            <tr>
+                                <td>Collection</td>
+                                <td>FW26 Monochrome</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Collection CTA -->
+        <section class="section collection-section" id="collection">
+            <div class="container cta-container">
+                <span class="section-num">04 / THE ARCHIVE</span>
+                <h2 class="cta-title">Acquire the Silhouette</h2>
+                <p class="cta-description">
+                    The FW26 Monochrome collection is available for private viewing and custom fittings. Secure your allocation.
+                </p>
+                <div class="form-wrapper">
+                    <form class="cta-form" onsubmit="event.preventDefault(); alert('Inquiry received. We will contact you soon.');">
+                        <div class="input-group">
+                            <input type="email" placeholder="ENTER YOUR EMAIL" required id="user-email">
+                            <button type="submit" class="btn-submit">
+                                REQUEST INVITATION
+                                <span class="arrow-icon">→</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Sleek Footer -->
+            <footer class="site-footer">
+                <div class="footer-left">
+                    &copy; 2026 L'ÉTOILE COUTURES. ALL RIGHTS RESERVED.
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="footer-link">Instagram</a>
+                    <a href="#" class="footer-link">Showroom</a>
+                    <a href="#" class="footer-link">Privacy</a>
+                </div>
+            </footer>
+        </section>
+
+    </div>
+
+    <!-- Scripts: Lenis (Smooth Scroll), GSAP (Animations), ScrollTrigger (Scroll Binders) -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>

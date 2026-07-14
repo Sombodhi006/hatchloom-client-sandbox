@@ -758,19 +758,26 @@ button {
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    z-index: -1;
+    z-index: 1;
 }
 
 .text-stripe {
     font-family: var(--font-sans);
-    font-size: 7.5vw;
-    font-weight: 800;
+    font-size: 8.5vw;
+    font-weight: 900;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.05);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
     text-transform: uppercase;
     white-space: nowrap;
     line-height: 1;
     display: inline-block;
+}
+
+.text-stripe .highlight-word {
+    color: var(--accent);
+    -webkit-text-stroke: none;
+    text-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
 }
 
 /* --- Section 3: Details Table --- */

@@ -6,7 +6,91 @@ document.addEventListener("DOMContentLoaded", () => {
     // ----------------------------------------------------
     // 1. Initial Config & Variables
     // ----------------------------------------------------
-    const totalImages = 120;
+    // List of numerically sorted image paths from assets01 and assets02
+    const imageSources = [
+        "./assets01/Generate_smooth_animation_model_._202607142207_000.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_001.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_002.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_003.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_004.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_005.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_006.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_007.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_008.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_009.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_010.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_011.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_012.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_013.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_014.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_015.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_016.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_017.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_018.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_019.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_020.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_021.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_022.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_023.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_024.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_025.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_026.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_027.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_028.jpg",
+        "./assets01/Generate_smooth_animation_model_._202607142207_029.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_030.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_034.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_035.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_037.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_038.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_045.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_047.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_051.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_052.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_053.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_054.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_055.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_057.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_058.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_061.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_062.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_063.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_064.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_066.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_067.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_069.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_070.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_071.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_072.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_073.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_074.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_075.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_076.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_077.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_078.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_079.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_080.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_081.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_082.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_083.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_084.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_085.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_086.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_087.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_088.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_089.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_090.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_091.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_092.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_093.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_094.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_095.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_096.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_097.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_098.jpg",
+        "./assets02/Generate_smooth_animation_model_._202607142207_099.jpg"
+    ];
+    const totalImages = imageSources.length;
     const images = [];
     let loadedCount = 0;
     
@@ -112,20 +196,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function preloadImages() {
         document.body.classList.add("is-loading");
         
-        for (let i = 1; i <= totalImages; i++) {
+        imageSources.forEach((src) => {
             const img = new Image();
-            // Zero pad frame index (e.g. 001, 012, 120)
-            const frameNum = String(i).padStart(3, "0");
-            
-            // Load frames 1-64 from assets1, and 65-120 from assets2
-            const folder = (i <= 64) ? "assets1" : "assets2";
-            img.src = `./${folder}/ezgif-frame-${frameNum}.jpg`;
+            img.src = src;
             
             img.onload = handleImageLoad;
             img.onerror = handleImageLoad; // Continue if an image fails to load
             
             images.push(img);
-        }
+        });
     }
 
     function handleImageLoad() {

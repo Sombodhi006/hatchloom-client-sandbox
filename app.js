@@ -277,8 +277,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const introTl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.5 } });
         
         introTl.to(".main-header", { opacity: 1, y: 0, mixBlendMode: "difference" }, 0.5)
-               .to(".hero-left-col", { opacity: 1, y: 0 }, 0.8)
-               .to(".hero-right-col", { opacity: 1, y: 0 }, 1.0);
+               .fromTo(".viewfinder-frame", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.8 }, 0.4)
+               .fromTo(".backdrop-left", { opacity: 0, x: -60 }, { opacity: 0.15, x: 0, duration: 1.5 }, 0.8)
+               .fromTo(".backdrop-right", { opacity: 0, x: 60 }, { opacity: 0.15, x: 0, duration: 1.5 }, 0.8)
+               .to(".viewfinder-left-panel", { opacity: 1, y: 0 }, 1.0);
 
         // --- Section Content Animations ---
         
@@ -349,6 +351,19 @@ document.addEventListener("DOMContentLoaded", () => {
         .from("#collection .cta-title", { opacity: 0, y: 50, duration: 1.2, ease: "power3.out" })
         .from("#collection .cta-description", { opacity: 0, y: 30, duration: 1.2, ease: "power3.out" }, "-=0.9")
         .from("#collection .form-wrapper", { opacity: 0, y: 30, duration: 1.2, ease: "power3.out" }, "-=0.9");
+
+        // Viewfinder controls: plus scroll down, minus scroll up
+        const btnPlus = document.getElementById("hero-btn-plus");
+        const btnMinus = document.getElementById("hero-btn-minus");
+        if (btnPlus && btnMinus) {
+            btnPlus.addEventListener("click", () => {
+                const target = document.getElementById("silhouette");
+                if (target) target.scrollIntoView({ behavior: "smooth" });
+            });
+            btnMinus.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
     }
 
     // Start loading

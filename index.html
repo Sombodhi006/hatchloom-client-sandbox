@@ -58,22 +58,87 @@
             </div>
         </header>
 
-        <!-- Hero Section -->
+        <!-- Hero Section (Viewfinder Layout) -->
         <section class="section hero-section" id="hero">
-            <div class="hero-bg-text">MONOCHROME</div>
-            <div class="container hero-container">
-                <div class="hero-left-col glass-panel">
-                    <span class="tag-line">COLLECTION № 01</span>
-                    <h1 class="title-main">Elegance<br>In Motion</h1>
+            <div class="viewfinder-frame">
+                <!-- Frame Corner/Tech Guides -->
+                <div class="frame-guide guide-top-left"></div>
+                <div class="frame-guide guide-top-right"></div>
+                <div class="frame-guide guide-bottom-left"></div>
+                <div class="frame-guide guide-bottom-right"></div>
+
+                <!-- 1. Viewfinder Header -->
+                <div class="viewfinder-header">
+                    <div class="brand-info">
+                        <span class="brand-title">L'ÉTOILE</span>
+                        <span class="brand-subtitle">STUDIO A &bull; 50mm f/1.8</span>
+                    </div>
+                    <div class="header-details">
+                        <span class="spec-label">COLLECTION № 01 / FW26</span>
+                        <span class="spec-divider"></span>
+                        <a href="tel:+33142685300" class="spec-phone">+33 1 42 68 53 00</a>
+                    </div>
                 </div>
-                <div class="hero-right-col glass-panel">
-                    <p class="hero-description">
-                        An exploration of structure, fabric, and silhouette under the high-contrast lighting of a singular spotlight. Every movement unveils a new contour, a soft curve, and a sharp boundary.
-                    </p>
-                    <div class="scroll-prompt">
-                        <span class="scroll-text">Scroll to Experience</span>
-                        <div class="scroll-line">
-                            <div class="scroll-line-fill"></div>
+
+                <!-- 2. Viewfinder Middle (Backdrop Text & Editorial Specs) -->
+                <div class="viewfinder-middle">
+                    <!-- Backdrop text split for masking effect -->
+                    <div class="viewfinder-backdrop">
+                        <div class="backdrop-part backdrop-left">L'É</div>
+                        <div class="backdrop-part backdrop-right">TOILE</div>
+                    </div>
+
+                    <!-- Editorial Specs (Left Panel) -->
+                    <div class="viewfinder-left-panel">
+                        <span class="tag-line">THE SILHOUETTE</span>
+                        <h2 class="hero-mini-title">Obsidian Motion</h2>
+                        <p class="hero-mini-desc">
+                            An exploration of structure, fabric, and silhouette under high-contrast spotlighting. Every movement unveils a new boundary of form.
+                        </p>
+                    </div>
+
+                    <!-- Vertical Right Link (Right Panel) -->
+                    <div class="viewfinder-right-panel">
+                        <a href="#silhouette" class="hero-vertical-link">
+                            <span>EXPLORE</span>
+                            <span class="link-line"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Viewfinder Footer -->
+                <div class="viewfinder-footer">
+                    <!-- Bottom Left: Status -->
+                    <div class="footer-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">LIVE RECORD</span>
+                    </div>
+                    
+                    <!-- Bottom Center: Year -->
+                    <div class="footer-year">
+                        <span>© 2026</span>
+                    </div>
+
+                    <!-- Bottom Right: Controls & Socials -->
+                    <div class="footer-controls">
+                        <!-- Pagination & Box Controls -->
+                        <div class="pagination-control">
+                            <div class="page-numbers">
+                                <span class="page-current">01</span>
+                                <span class="page-divider"></span>
+                                <span class="page-total">04</span>
+                            </div>
+                            <div class="control-box">
+                                <button class="control-btn btn-plus" id="hero-btn-plus">+</button>
+                                <button class="control-btn btn-minus" id="hero-btn-minus">-</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Socials -->
+                        <div class="footer-socials">
+                            <a href="https://behance.net" target="_blank" rel="noreferrer" class="social-link">Be</a>
+                            <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-link">In</a>
+                            <a href="https://facebook.com" target="_blank" rel="noreferrer" class="social-link">Fb</a>
                         </div>
                     </div>
                 </div>

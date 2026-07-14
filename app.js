@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Load frames 1-64 from assets1, and 65-120 from assets2
             const folder = (i <= 64) ? "assets1" : "assets2";
-            img.src = `../${folder}/ezgif-frame-${frameNum}.jpg`;
+            img.src = `./${folder}/ezgif-frame-${frameNum}.jpg`;
             
             img.onload = handleImageLoad;
             img.onerror = handleImageLoad; // Continue if an image fails to load

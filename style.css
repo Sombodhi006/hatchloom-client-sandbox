@@ -760,6 +760,41 @@ button {
     color: #fff;
 }
 
+/* --- Readability Dark Glass Panels --- */
+.glass-panel {
+    background: rgba(4, 4, 4, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 3rem !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 768px) {
+    .glass-panel {
+        padding: 1.5rem !important;
+    }
+}
+
+/* Make sure inner layouts align with glass panel paddings */
+.text-block {
+    padding: 0;
+}
+.details-table-col {
+    padding: 3rem;
+}
+
 /* --- GSAP Animation Initial States --- */
 .hero-left-col, .hero-right-col,
 .block-left, .block-right, .block-center,

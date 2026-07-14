@@ -284,17 +284,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- Section Content Animations ---
         
-        // Section 1: The Silhouette
-        gsap.timeline({
+        // Section 1: The Silhouette (Premium staggered scroll-reveal)
+        const silhouetteTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#silhouette",
-                start: "top 75%",
-                end: "bottom 30%",
+                start: "top 70%",
                 toggleActions: "play none none reverse"
             }
-        })
-        .to("#silhouette .block-left", { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" })
-        .to("#silhouette .block-right", { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }, "-=0.9");
+        });
+        
+        silhouetteTl.fromTo("#silhouette .card-left", 
+            { opacity: 0, y: 80, scale: 0.96 }, 
+            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" }
+        )
+        .fromTo("#silhouette .card-left .section-num", 
+            { opacity: 0, y: 15 }, 
+            { opacity: 1, y: 0, duration: 0.8 }, 
+            "-=1.0"
+        )
+        .fromTo("#silhouette .card-left h2", 
+            { opacity: 0, y: 25 }, 
+            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
+            "-=0.7"
+        )
+        .fromTo("#silhouette .card-left .editorial-body", 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
+            "-=0.7"
+        )
+        .fromTo("#silhouette .card-right", 
+            { opacity: 0, y: 80, scale: 0.96 }, 
+            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" },
+            "-=1.2"
+        )
+        .fromTo("#silhouette .card-right .editorial-quote", 
+            { opacity: 0, y: 25 }, 
+            { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
+            "-=0.9"
+        );
 
         // Section 2: Light and Shadow Text Stripes
         gsap.to("#stripe-1", {
@@ -317,17 +344,44 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        gsap.to("#spotlight .block-center", {
-            opacity: 1,
-            y: 0,
-            duration: 1.5,
-            ease: "power3.out",
+        // Section 2: Light and Shadow Content (Premium staggered scroll-reveal)
+        const spotlightTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#spotlight",
-                start: "top 65%",
+                start: "top 70%",
                 toggleActions: "play none none reverse"
             }
         });
+        
+        spotlightTl.fromTo("#spotlight .card-left", 
+            { opacity: 0, y: 80, scale: 0.96 }, 
+            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" }
+        )
+        .fromTo("#spotlight .card-left .section-num", 
+            { opacity: 0, y: 15 }, 
+            { opacity: 1, y: 0, duration: 0.8 }, 
+            "-=1.0"
+        )
+        .fromTo("#spotlight .card-left h2", 
+            { opacity: 0, y: 25 }, 
+            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
+            "-=0.7"
+        )
+        .fromTo("#spotlight .card-left .editorial-body", 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
+            "-=0.7"
+        )
+        .fromTo("#spotlight .card-right", 
+            { opacity: 0, y: 80, scale: 0.96 }, 
+            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" },
+            "-=1.2"
+        )
+        .fromTo("#spotlight .card-right .editorial-quote", 
+            { opacity: 0, y: 25 }, 
+            { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
+            "-=0.9"
+        );
 
         // Section 3: Details & Specs
         gsap.timeline({

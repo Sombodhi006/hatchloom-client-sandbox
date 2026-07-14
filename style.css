@@ -459,6 +459,19 @@ button {
     mix-blend-mode: difference;
     line-height: 1;
     user-select: none;
+    transition: font-size 0.5s ease;
+}
+
+@media (max-width: 1200px) {
+    .backdrop-part {
+        font-size: 15vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .viewfinder-backdrop {
+        display: none !important;
+    }
 }
 
 /* Left panel (specs) */
@@ -775,9 +788,94 @@ button {
 }
 
 .text-stripe .highlight-word {
-    color: var(--accent);
-    -webkit-text-stroke: none;
-    text-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+    color: rgba(255, 255, 255, 0.18);
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.spotlight-section .section-num,
+.silhouette-section .section-num {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* --- Glass Card Layout & Typography --- */
+.side-container {
+    max-width: 100% !important;
+    padding: 0 6rem !important;
+}
+@media (max-width: 1024px) {
+    .side-container {
+        padding: 0 3rem !important;
+    }
+}
+
+.editorial-side-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    gap: 4rem;
+}
+@media (max-width: 900px) {
+    .editorial-side-layout {
+        flex-direction: column;
+        gap: 3rem;
+    }
+}
+
+.glass-card {
+    background: rgba(4, 4, 4, 0.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+}
+
+.card-left {
+    width: 440px;
+    flex-shrink: 0;
+}
+.card-right {
+    width: 380px;
+    flex-shrink: 0;
+}
+@media (max-width: 900px) {
+    .card-left, .card-right {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+.glass-card h2.editorial-heading {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+.glass-card h3.editorial-quote {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--text-secondary);
 }
 
 /* --- Section 3: Details Table --- */
@@ -1002,7 +1100,8 @@ button {
 /* --- GSAP Animation Initial States --- */
 .viewfinder-left-panel,
 .block-left, .block-right, .block-center,
-.details-table-col {
+.details-table-col,
+.glass-card {
     opacity: 0;
     transform: translateY(30px);
 }

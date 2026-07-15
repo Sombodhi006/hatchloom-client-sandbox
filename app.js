@@ -69,19 +69,48 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Redraw current active frame
         if (images.length === totalImages && loadedCount === totalImages) {
-            const currentFrame = Math.round(sequenceObject.frame);
-            drawFrame(currentFrame, sequenceObject.zoom);
+            drawFrame(sequenceObject.frame, sequenceObject.zoom);
         }
     }
 
-    function drawFrame(index, zoomFactor = 1.0) {
-        const img = images[index];
-        if (!img) return;
-
+    function drawFrame(frameFloat, zoomFactor = 1.0) {
         const dpr = window.devicePixelRatio || 1;
         const w = canvas.width;
         const h = canvas.height;
         
+        // Clear canvas before drawing
+        ctx.clearRect(0, 0, w, h);
+        
+        // Enable high-quality image smoothing
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+
+        // Calculate current frames and interpolation factor (alpha)
+        const index1 = Math.floor(frameFloat);
+        const index2 = Math.min(index1 + 1, totalImages - 1);
+        const alpha = frameFloat - index1;
+
+        const img1 = images[index1];
+        const img2 = images[index2];
+
+        if (img1 && img2 && index1 !== index2 && alpha > 0.01) {
+            // Draw first frame (fading out)
+            ctx.globalAlpha = 1 - alpha;
+            drawSingleImage(img1, w, h, zoomFactor);
+
+            // Draw second frame (fading in)
+            ctx.globalAlpha = alpha;
+            drawSingleImage(img2, w, h, zoomFactor);
+            
+            // Reset transparency
+            ctx.globalAlpha = 1.0;
+        } else if (img1) {
+            ctx.globalAlpha = 1.0;
+            drawSingleImage(img1, w, h, zoomFactor);
+        }
+    }
+
+    function drawSingleImage(img, w, h, zoomFactor) {
         const iw = img.naturalWidth || img.width;
         const ih = img.naturalHeight || img.height;
         
@@ -100,11 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const x = (w - drawW) / 2;
         const y = (h - drawH) / 2;
         
-        ctx.clearRect(0, 0, w, h);
-        
-        // Draw with smoothing for high-quality scaling
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = "high";
         ctx.drawImage(img, 0, 0, iw, ih, x, y, drawW, drawH);
     }
 
@@ -175,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- Sequence Scroll Trigger ---
         // Ties scroll progress to the frame index and zoom factor
-        gsap.to(sequenceObject, {
+        const scrollTween = gsap.to(sequenceObject, {
             frame: totalImages - 1,
             ease: "none",
             scrollTrigger: {
@@ -183,15 +207,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 start: "top top",
                 end: "bottom bottom",
                 scrub: 0.6, // Slight lag to blend frames together smoothly
-                onUpdate: (self) => {
-                    // Calculate non-linear progressive zoom:
-                    // Start at 1.03, swell up to 1.18 in the center, settle back to 1.05
-                    const progress = self.progress;
-                    sequenceObject.zoom = 1.03 + Math.sin(progress * Math.PI) * 0.15;
-                    
-                    const currentFrame = Math.round(sequenceObject.frame);
-                    drawFrame(currentFrame, sequenceObject.zoom);
-                }
+            },
+            onUpdate: () => {
+                // Calculate non-linear progressive zoom based on tween progress (fully scrubbed):
+                // Start at 1.03, swell up to 1.18 in the center, settle back to 1.05
+                const progress = scrollTween.progress();
+                sequenceObject.zoom = 1.03 + Math.sin(progress * Math.PI) * 0.15;
+                
+                // Draw with sub-pixel / float frame interpolation
+                drawFrame(sequenceObject.frame, sequenceObject.zoom);
             }
         });
 

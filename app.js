@@ -282,46 +282,119 @@ document.addEventListener("DOMContentLoaded", () => {
                .fromTo(".backdrop-right", { opacity: 0, x: 60 }, { opacity: 0.15, x: 0, duration: 1.5 }, 0.8)
                .to(".viewfinder-left-panel", { opacity: 1, y: 0 }, 1.0);
 
-        // --- Section Content Animations ---
-        
-        // Section 1: The Silhouette (Premium staggered scroll-reveal)
-        const silhouetteTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#silhouette",
-                start: "top 70%",
-                toggleActions: "play none none reverse"
+        // --- Section Content Animations (Responsive Line Splits on Scroll) ---
+
+        // Custom responsive line-splitting helper
+        function splitTextIntoLines(element) {
+            if (!element.dataset.originalHtml) {
+                element.dataset.originalHtml = element.innerHTML;
+            } else {
+                element.innerHTML = element.dataset.originalHtml;
             }
-        });
+
+            const text = element.innerText;
+            const words = text.split(" ");
+            element.innerHTML = words.map(word => `<span class="split-word" style="display: inline-block;">${word}</span>`).join(" ");
+
+            const spans = element.querySelectorAll(".split-word");
+            const lines = [];
+            let currentLine = [];
+            let lastOffsetTop = -1;
+
+            spans.forEach(span => {
+                const offsetTop = span.offsetTop;
+                if (lastOffsetTop !== -1 && Math.abs(offsetTop - lastOffsetTop) > 5) {
+                    lines.push(currentLine);
+                    currentLine = [];
+                }
+                currentLine.push(span);
+                lastOffsetTop = offsetTop;
+            });
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+
+            element.innerHTML = "";
+            lines.forEach(lineSpans => {
+                const lineText = lineSpans.map(s => s.innerText).join(" ");
+                const parentSpan = document.createElement("span");
+                parentSpan.className = "split-line-parent";
+                
+                const childSpan = document.createElement("span");
+                childSpan.className = "split-line-child";
+                childSpan.innerText = lineText;
+                
+                parentSpan.appendChild(childSpan);
+                element.appendChild(parentSpan);
+            });
+        }
+
+        let splitInstances = [];
         
-        silhouetteTl.fromTo("#silhouette .card-left", 
-            { opacity: 0, y: 80, scale: 0.96 }, 
-            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" }
-        )
-        .fromTo("#silhouette .card-left .section-num", 
-            { opacity: 0, y: 15 }, 
-            { opacity: 1, y: 0, duration: 0.8 }, 
-            "-=1.0"
-        )
-        .fromTo("#silhouette .card-left h2", 
-            { opacity: 0, y: 25 }, 
-            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
-            "-=0.7"
-        )
-        .fromTo("#silhouette .card-left .editorial-body", 
-            { opacity: 0, y: 20 }, 
-            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
-            "-=0.7"
-        )
-        .fromTo("#silhouette .card-right", 
-            { opacity: 0, y: 80, scale: 0.96 }, 
-            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" },
-            "-=1.2"
-        )
-        .fromTo("#silhouette .card-right .editorial-quote", 
-            { opacity: 0, y: 25 }, 
-            { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
-            "-=0.9"
-        );
+        function initSplitTextAnimations() {
+            // Kill existing triggers
+            splitInstances.forEach(inst => {
+                if (inst.scrollTrigger) inst.scrollTrigger.kill();
+                inst.kill();
+            });
+            splitInstances = [];
+
+            // Animate headers, bodies, and quotes
+            const elements = document.querySelectorAll(".animate-split");
+            elements.forEach(el => {
+                splitTextIntoLines(el);
+                
+                const children = el.querySelectorAll(".split-line-child");
+                
+                const anim = gsap.fromTo(children, 
+                    { yPercent: 105 },
+                    {
+                        yPercent: 0,
+                        duration: 1.4,
+                        ease: "power4.out",
+                        stagger: 0.08,
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 88%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+                
+                splitInstances.push(anim);
+            });
+        }
+
+        // Initialize SplitText animations
+        initSplitTextAnimations();
+        
+        // Handle window resizing (responsive re-splitting)
+        let resizeTimeout;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                initSplitTextAnimations();
+                ScrollTrigger.refresh();
+            }, 200);
+        });
+
+        // Staggered reveal for section numbers
+        document.querySelectorAll(".section-num").forEach(num => {
+            gsap.fromTo(num, 
+                { opacity: 0, y: 15 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.0,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: num,
+                        start: "top 88%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
 
         // Section 2: Light and Shadow Text Stripes
         gsap.to("#stripe-1", {
@@ -343,45 +416,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 scrub: 1.0
             }
         });
-
-        // Section 2: Light and Shadow Content (Premium staggered scroll-reveal)
-        const spotlightTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#spotlight",
-                start: "top 70%",
-                toggleActions: "play none none reverse"
-            }
-        });
-        
-        spotlightTl.fromTo("#spotlight .card-left", 
-            { opacity: 0, y: 80, scale: 0.96 }, 
-            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" }
-        )
-        .fromTo("#spotlight .card-left .section-num", 
-            { opacity: 0, y: 15 }, 
-            { opacity: 1, y: 0, duration: 0.8 }, 
-            "-=1.0"
-        )
-        .fromTo("#spotlight .card-left h2", 
-            { opacity: 0, y: 25 }, 
-            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
-            "-=0.7"
-        )
-        .fromTo("#spotlight .card-left .editorial-body", 
-            { opacity: 0, y: 20 }, 
-            { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 
-            "-=0.7"
-        )
-        .fromTo("#spotlight .card-right", 
-            { opacity: 0, y: 80, scale: 0.96 }, 
-            { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power4.out" },
-            "-=1.2"
-        )
-        .fromTo("#spotlight .card-right .editorial-quote", 
-            { opacity: 0, y: 25 }, 
-            { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
-            "-=0.9"
-        );
 
         // Section 3: Details & Specs
         gsap.timeline({
